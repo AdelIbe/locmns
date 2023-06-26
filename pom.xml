@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.9</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>edu.fbansept</groupId>
+	<artifactId>demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>demo</name>
+	<description>Demo project for Spring Boot</description>
+
+	<packaging>war</packaging>
+
+	<properties>
+		<java.version>11</java.version>
+		<skipUnitTest>false</skipUnitTest>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<skipUnitTest>false</skipUnitTest>
+				<adresse_serveur_bdd>localhost:3306</adresse_serveur_bdd>
+				<nom_bdd>Spring_db</nom_bdd>
+				<utilisateur_bdd>root</utilisateur_bdd>
+				<mot_de_passe_bdd></mot_de_passe_bdd>
+				<ddl_auto>create</ddl_auto>
+				<nom_fichier_sql>mysql</nom_fichier_sql>
+				<initialisation_donnee_bdd>true</initialisation_donnee_bdd>
+				<mode_initialisation_donnee_bdd>always</mode_initialisation_donnee_bdd>
+				<dossier_upload>A changer dans le fichier C:\Users\neofr\.m2\settings.xml</dossier_upload>
+				<jwt_secret>azerty</jwt_secret>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>prod</id>
+			<properties>
+				<skipUnitTest>true</skipUnitTest>
+				<adresse_serveur_bdd>172.18.0.2:3306</adresse_serveur_bdd>
+				<nom_bdd>spring_mns_23</nom_bdd>
+				<utilisateur_bdd>root</utilisateur_bdd>
+				<mot_de_passe_bdd>Info à définir dans le fichier settings.xml du serveur</mot_de_passe_bdd>
+				<ddl_auto>none</ddl_auto>
+				<nom_fichier_sql></nom_fichier_sql>
+				<initialisation_donnee_bdd>false</initialisation_donnee_bdd>
+				<mode_initialisation_donnee_bdd>never</mode_initialisation_donnee_bdd>
+				<dossier_upload>/uploads</dossier_upload>
+				<jwt_secret>Info à définir dans le fichier settings.xml du serveur</jwt_secret>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId >maven-surefire-plugin</artifactId>
+				<version>3.0.0-M6</version>
+				<configuration>
+					<skipTests>${skipUnitTest}</skipTests>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>
